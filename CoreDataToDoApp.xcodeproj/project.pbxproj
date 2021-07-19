@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF701EE726A54557005ED6A5 /* Tasks+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF701EE526A54557005ED6A5 /* Tasks+CoreDataClass.swift */; };
+		CF701EE826A54557005ED6A5 /* Tasks+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF701EE626A54557005ED6A5 /* Tasks+CoreDataProperties.swift */; };
+		CF701EEA26A545A6005ED6A5 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF701EE926A545A6005ED6A5 /* DetailsViewController.swift */; };
 		CF7B5775269B26DF004213FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7B5774269B26DF004213FC /* AppDelegate.swift */; };
 		CF7B5777269B26DF004213FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7B5776269B26DF004213FC /* SceneDelegate.swift */; };
 		CF7B5779269B26DF004213FC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7B5778269B26DF004213FC /* ViewController.swift */; };
@@ -17,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CF701EE526A54557005ED6A5 /* Tasks+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tasks+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CF701EE626A54557005ED6A5 /* Tasks+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tasks+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CF701EE926A545A6005ED6A5 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		CF7B5771269B26DF004213FC /* CoreDataToDoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataToDoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF7B5774269B26DF004213FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF7B5776269B26DF004213FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,10 +64,13 @@
 		CF7B5773269B26DF004213FC /* CoreDataToDoApp */ = {
 			isa = PBXGroup;
 			children = (
+				CF701EE526A54557005ED6A5 /* Tasks+CoreDataClass.swift */,
+				CF701EE626A54557005ED6A5 /* Tasks+CoreDataProperties.swift */,
 				CF7B5774269B26DF004213FC /* AppDelegate.swift */,
 				CF7B5776269B26DF004213FC /* SceneDelegate.swift */,
 				CF7B5778269B26DF004213FC /* ViewController.swift */,
 				CF7B577A269B26DF004213FC /* Main.storyboard */,
+				CF701EE926A545A6005ED6A5 /* DetailsViewController.swift */,
 				CF7B5780269B26E2004213FC /* Assets.xcassets */,
 				CF7B5782269B26E2004213FC /* LaunchScreen.storyboard */,
 				CF7B5785269B26E2004213FC /* Info.plist */,
@@ -142,8 +151,11 @@
 			files = (
 				CF7B5779269B26DF004213FC /* ViewController.swift in Sources */,
 				CF7B5775269B26DF004213FC /* AppDelegate.swift in Sources */,
+				CF701EE826A54557005ED6A5 /* Tasks+CoreDataProperties.swift in Sources */,
 				CF7B577F269B26DF004213FC /* CoreDataToDoApp.xcdatamodeld in Sources */,
+				CF701EEA26A545A6005ED6A5 /* DetailsViewController.swift in Sources */,
 				CF7B5777269B26DF004213FC /* SceneDelegate.swift in Sources */,
+				CF701EE726A54557005ED6A5 /* Tasks+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

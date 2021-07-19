@@ -51,16 +51,25 @@
                                 <rect key="frame" x="174" y="605" width="67" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="createBtn"/>
+                                <connections>
+                                    <action selector="createButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AEb-Rf-i4A"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="TODOTasks" id="QYB-t5-AyA">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="UPf-dZ-daG"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="UPf-dZ-daG">
+                            <connections>
+                                <action selector="taskAddBarButton:" destination="BYZ-38-t0r" id="zjZ-am-1Dn"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cellEditViewSegmentControl" destination="jYG-dY-0iw" id="WYS-Bz-Ikv"/>
                         <outlet property="tableView" destination="zpR-ba-jDA" id="GYU-Hk-1mg"/>
+                        <outlet property="taskTextField" destination="8ei-as-JL1" id="4MX-Un-yZF"/>
                         <segue destination="e0h-G7-ngP" kind="show" id="LZc-mQ-u4D"/>
                     </connections>
                 </viewController>

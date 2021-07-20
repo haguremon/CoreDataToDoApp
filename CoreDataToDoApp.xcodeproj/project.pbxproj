@@ -17,6 +17,7 @@
 		CF7B577F269B26DF004213FC /* CoreDataToDoApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CF7B577D269B26DF004213FC /* CoreDataToDoApp.xcdatamodeld */; };
 		CF7B5781269B26E2004213FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF7B5780269B26E2004213FC /* Assets.xcassets */; };
 		CF7B5784269B26E2004213FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF7B5782269B26E2004213FC /* LaunchScreen.storyboard */; };
+		CF8C3F7826A6D53700FFFA4F /*  extensionVCTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8C3F7726A6D53700FFFA4F /*  extensionVCTable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		CF7B5780269B26E2004213FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CF7B5783269B26E2004213FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CF7B5785269B26E2004213FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CF8C3F7726A6D53700FFFA4F /*  extensionVCTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " extensionVCTable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				CF7B5774269B26DF004213FC /* AppDelegate.swift */,
 				CF7B5776269B26DF004213FC /* SceneDelegate.swift */,
 				CF7B5778269B26DF004213FC /* ViewController.swift */,
+				CF8C3F7726A6D53700FFFA4F /*  extensionVCTable.swift */,
 				CF7B577A269B26DF004213FC /* Main.storyboard */,
 				CF701EE926A545A6005ED6A5 /* DetailsViewController.swift */,
 				CF7B5780269B26E2004213FC /* Assets.xcassets */,
@@ -149,6 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF8C3F7826A6D53700FFFA4F /*  extensionVCTable.swift in Sources */,
 				CF7B5779269B26DF004213FC /* ViewController.swift in Sources */,
 				CF7B5775269B26DF004213FC /* AppDelegate.swift in Sources */,
 				CF701EE826A54557005ED6A5 /* Tasks+CoreDataProperties.swift in Sources */,

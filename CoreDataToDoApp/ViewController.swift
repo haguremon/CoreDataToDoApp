@@ -6,12 +6,12 @@
 //
 
 import UIKit
-
+import CoreData
 class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var taskTextField: UITextField!
-    @IBOutlet weak var cellEditViewSegmentControl: UISegmentedControl!
     
+    @IBOutlet weak var cellEditViewSegment: UISegmentedControl!
     //()でAppDelegateを使えるようにしてそれから下でNSManagedObjectContextを作成する//永久的のコンテント
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -43,6 +43,51 @@ class ViewController: UIViewController {
         guard let task = taskTextField.text, !task.isEmpty else { return }
         newTaskData(task: task)
         //tableView.reloadData()
+    }
+    
+    @IBAction func cellEditViewSegmentControl(_ sender: UISegmentedControl) {
+        let fetchRequest = Tasks.fetchRequest() as NSFetchRequest<Tasks>
+        //let predicate: NSPredicate? = nil
+        //fetchRequest.predicate = predicate
+        //fetchRequest.includesSubentities = false
+        //fetchRequest.entity = Tasks.entity()
+        switch cellEditViewSegment.selectedSegmentIndex {
+        case 0:
+            tableView.isEditing = false
+        case 1:
+            tableView.isEditing = true
+        case 2:
+            
+            do {
+                let sort = NSSortDescriptor(key: "task", ascending: true)
+                fetchRequest.sortDescriptors = [sort]
+            
+                self.tasks = try context.fetch(fetchRequest)
+                
+                //self.createTasksDataAll()
+                self.tableView.reloadData()
+            } catch  {
+                print(error)
+            }
+
+            print("")
+        case 3:
+            do {
+              
+                let sort = NSSortDescriptor(key: "task", ascending: false)
+                fetchRequest.sortDescriptors = [sort]
+                self.tasks = try context.fetch(fetchRequest)
+                //self.createTasksDataAll()
+                self.tableView.reloadData()
+                print(tasks)
+            } catch  {
+                print(error)
+            }
+            print("")
+        default:
+            print("")
+        }
+    
     }
     
     //coreDataのCRUD等
@@ -122,7 +167,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 guard let field = dalog.textFields?.first, let editText = field.text, !editText.isEmpty else{
                     return
                 }
-                //クロージャないでselfに参照するのでweakをつけて弱参照にしてる
+                //クロージャ内でselfに参照するのでweakをつけて弱参照にしてる
                 self?.upDateTasksData(task: task, newTask: editText)
             }
             dalog.addAction(EditTask)
@@ -142,7 +187,7 @@ extension ViewController: UITextFieldDelegate{
         taskTextField.resignFirstResponder()
         newTaskData(task: taskTextField.text!)
         taskTextField.text = ""
-        tableView.reloadData()
+        //tableView.reloadData()
         return true
     }
 }

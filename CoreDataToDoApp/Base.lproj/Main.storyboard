@@ -46,6 +46,9 @@
                                     <segment title="昇順"/>
                                     <segment title="降順"/>
                                 </segments>
+                                <connections>
+                                    <action selector="cellEditViewSegmentControl:" destination="BYZ-38-t0r" eventType="valueChanged" id="UbG-Id-DiW"/>
+                                </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZd-ME-a5v">
                                 <rect key="frame" x="174" y="605" width="67" height="30"/>
@@ -67,7 +70,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="cellEditViewSegmentControl" destination="jYG-dY-0iw" id="WYS-Bz-Ikv"/>
+                        <outlet property="cellEditViewSegment" destination="jYG-dY-0iw" id="0YI-is-mnT"/>
                         <outlet property="tableView" destination="zpR-ba-jDA" id="GYU-Hk-1mg"/>
                         <outlet property="taskTextField" destination="8ei-as-JL1" id="4MX-Un-yZF"/>
                         <segue destination="e0h-G7-ngP" kind="show" id="LZc-mQ-u4D"/>

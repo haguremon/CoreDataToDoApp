@@ -56,8 +56,29 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             tableView.endUpdates()
         }
     }
-//    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-//        <#code#>
-//    }
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        let vc = storyboard?.instantiateViewController(identifier: "vc2") as! DetailsViewController
+        vc.tasks = tasks[indexPath.row]
+        vc.task = tasks[indexPath.row].task!
+        vc.create = tasks[indexPath.row].date!
+        vc.memo = tasks[indexPath.row].memo ?? "特になし"
+        present(vc, animated: true)
+    }
+    //canMoveRowAtでセルの動かしを許可
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+      return true
+    }
+    //moveRowAtで並び替え
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        context.delete(tasks[sourceIndexPath.row])
+        context.insert(tasks[destinationIndexPath.row])
+        do {
+            try context.save()
+            createTasksDataAll()
+        } catch {
+            print(error)
+        }
+    
+    }
 }
 

@@ -11,7 +11,7 @@
         <!--TODOTasks-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CoreDataToDoApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="vc" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="ViewController" customModule="CoreDataToDoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -73,7 +73,7 @@
                         <outlet property="cellEditViewSegment" destination="jYG-dY-0iw" id="0YI-is-mnT"/>
                         <outlet property="tableView" destination="zpR-ba-jDA" id="GYU-Hk-1mg"/>
                         <outlet property="taskTextField" destination="8ei-as-JL1" id="4MX-Un-yZF"/>
-                        <segue destination="e0h-G7-ngP" kind="show" id="LZc-mQ-u4D"/>
+                        <segue destination="e0h-G7-ngP" kind="presentation" identifier="vc2" modalPresentationStyle="fullScreen" id="LZc-mQ-u4D"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -83,7 +83,7 @@
         <!--Details-->
         <scene sceneID="Iz8-b5-Mih">
             <objects>
-                <viewController id="e0h-G7-ngP" customClass="DetailsViewController" customModule="CoreDataToDoApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="vc2" modalPresentationStyle="fullScreen" id="e0h-G7-ngP" customClass="DetailsViewController" customModule="CoreDataToDoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WmQ-xU-ETa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -118,11 +118,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ndr-IQ-tdm">
+                                <rect key="frame" x="38" y="776" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="戻る"/>
+                                <connections>
+                                    <action selector="returnButton:" destination="e0h-G7-ngP" eventType="touchUpInside" id="20F-XR-iHe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pbV-EO-nfC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="Details" id="foY-Il-KH3"/>
+                    <connections>
+                        <outlet property="createLabel" destination="mhZ-Wa-CDP" id="e2N-i5-gxv"/>
+                        <outlet property="memoTextView" destination="2WR-ro-N3T" id="DTx-Um-299"/>
+                        <outlet property="taskLabel" destination="cEj-rh-hoN" id="luI-Wy-zhU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M2Z-g3-DYP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

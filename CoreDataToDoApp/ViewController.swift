@@ -59,8 +59,10 @@ class ViewController: UIViewController {
         case 2:
             
             do {
-                let sort = NSSortDescriptor(key: "task", ascending: true)
-                fetchRequest.sortDescriptors = [sort]
+                let sort1 = NSSortDescriptor(key: "task", ascending: true)
+                let sort2 = NSSortDescriptor(key: "date", ascending: true)
+
+                fetchRequest.sortDescriptors = [sort1,sort2]
             
                 self.tasks = try context.fetch(fetchRequest)
                 
@@ -74,8 +76,9 @@ class ViewController: UIViewController {
         case 3:
             do {
               
-                let sort = NSSortDescriptor(key: "task", ascending: false)
-                fetchRequest.sortDescriptors = [sort]
+                let sort1 = NSSortDescriptor(key: "task", ascending: false)
+                let sort2 = NSSortDescriptor(key: "date", ascending: false)
+                fetchRequest.sortDescriptors = [sort1,sort2]
                 self.tasks = try context.fetch(fetchRequest)
                 //self.createTasksDataAll()
                 self.tableView.reloadData()
@@ -122,6 +125,17 @@ class ViewController: UIViewController {
             print(error)
         }
     }
+    //上と似てるから変更できそう
+    func upTasksMemo(task: Tasks, upMemo: String){
+        task.memo = upMemo
+        do {
+            try context.save()
+            createTasksDataAll()
+        } catch  {
+            print(error)
+        }
+    }
+    
     func deleteTasksData(task: Tasks){
         context.delete(task)
         do {
@@ -134,6 +148,7 @@ class ViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
+
 }
 
 

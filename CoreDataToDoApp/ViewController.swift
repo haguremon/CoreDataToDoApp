@@ -57,16 +57,16 @@ class ViewController: UIViewController {
         case 1:
             tableView.isEditing = true
         case 2:
-            
+            //keyをdateにしたらちゃんと昇順と降順に並び替えることができた
             do {
-                let sort1 = NSSortDescriptor(key: "task", ascending: true)
-                let sort2 = NSSortDescriptor(key: "date", ascending: true)
-
-                fetchRequest.sortDescriptors = [sort1,sort2]
+                let sort1 = NSSortDescriptor(key: "date", ascending: true)
+                //let sort2 = NSSortDescriptor(key: "date", ascending: true)
+                //let sort3 = NSSortDescriptor(key: "memo", ascending: true)
+                fetchRequest.sortDescriptors = [sort1]
             
-                self.tasks = try context.fetch(fetchRequest)
-                
-                //self.createTasksDataAll()
+                tasks = try context.fetch(fetchRequest)
+                //try context.save()
+                //createTasksDataAll()
                 self.tableView.reloadData()
             } catch  {
                 print(error)
@@ -76,12 +76,14 @@ class ViewController: UIViewController {
         case 3:
             do {
               
-                let sort1 = NSSortDescriptor(key: "task", ascending: false)
-                let sort2 = NSSortDescriptor(key: "date", ascending: false)
-                fetchRequest.sortDescriptors = [sort1,sort2]
-                self.tasks = try context.fetch(fetchRequest)
-                //self.createTasksDataAll()
-                self.tableView.reloadData()
+                let sort1 = NSSortDescriptor(key: "date", ascending: false)
+                //let sort2 = NSSortDescriptor(key: "date", ascending: false)
+                //let sort3 = NSSortDescriptor(key: "memo", ascending: false)
+                fetchRequest.sortDescriptors = [sort1]
+                tasks = try context.fetch(fetchRequest)
+                tableView.reloadData()
+                //try context.save()
+                //createTasksDataAll()
                 print(tasks)
             } catch  {
                 print(error)

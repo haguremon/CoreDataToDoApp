@@ -123,7 +123,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="戻る"/>
                                 <connections>
-                                    <action selector="returnButton:" destination="e0h-G7-ngP" eventType="touchUpInside" id="20F-XR-iHe"/>
+                                    <action selector="returnButton:" destination="e0h-G7-ngP" eventType="touchUpInside" id="vRr-Wl-38q"/>
                                 </connections>
                             </button>
                         </subviews>

@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     @IBAction func taskAddBarButton(_ sender: UIBarButtonItem) {
         let dalog = UIAlertController(title: "taskAdd", message: "タスクを追加します", preferredStyle: .alert)
         dalog.addTextField(configurationHandler: nil)//dalogにTextFieldを加える//アクションシートにはテキストフィールドは加えることができない
-        let createTaskAction = UIAlertAction(title: "createTask", style: .default) {[weak self] _ in
+        let createTaskAction = UIAlertAction(title: "createTask", style: .default) { [weak self] _ in
             //field⇨dalogでtextFieldが追加されてるか判断して、text⇨textFieldsのテキストを取得する
             guard let field = dalog.textFields?.first, let text = field.text, !text.isEmpty else{
                 return
@@ -47,27 +47,23 @@ class ViewController: UIViewController {
     
     @IBAction func cellEditViewSegmentControl(_ sender: UISegmentedControl) {
         let fetchRequest = Tasks.fetchRequest() as NSFetchRequest<Tasks>
-        //let predicate: NSPredicate? = nil
-        //fetchRequest.predicate = predicate
-        //fetchRequest.includesSubentities = false
-        //fetchRequest.entity = Tasks.entity()
+
         switch cellEditViewSegment.selectedSegmentIndex {
         case 0:
             tableView.isEditing = false
         case 1:
             tableView.isEditing = true
         case 2:
-            //keyをdateにしたらちゃんと昇順と降順に並び替えることができた
+      
             do {
                 let sort1 = NSSortDescriptor(key: "date", ascending: true)
-                //let sort2 = NSSortDescriptor(key: "date", ascending: true)
-                //let sort3 = NSSortDescriptor(key: "memo", ascending: true)
+                
                 fetchRequest.sortDescriptors = [sort1]
             
                 tasks = try context.fetch(fetchRequest)
-                //try context.save()
-                //createTasksDataAll()
-                self.tableView.reloadData()
+                try context.save()
+                createTasksDataAll()
+        
             } catch  {
                 print(error)
             }
@@ -77,14 +73,12 @@ class ViewController: UIViewController {
             do {
               
                 let sort1 = NSSortDescriptor(key: "date", ascending: false)
-                //let sort2 = NSSortDescriptor(key: "date", ascending: false)
-                //let sort3 = NSSortDescriptor(key: "memo", ascending: false)
                 fetchRequest.sortDescriptors = [sort1]
                 tasks = try context.fetch(fetchRequest)
                 tableView.reloadData()
-                //try context.save()
-                //createTasksDataAll()
-                print(tasks)
+                try context.save()
+                createTasksDataAll()
+            
             } catch  {
                 print(error)
             }
@@ -150,6 +144,11 @@ class ViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
+//    @IBAction func exit(segue: UIStoryboardSegue){
+//        let vc2 = segue.destination as! DetailsViewController
+//        upTasksMemo(task: vc2.tasks, upMemo: vc2.memoTextView.text)
+//
+//    }
 
 }
 

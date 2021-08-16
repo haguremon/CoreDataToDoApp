@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var cellEditViewSegment: UISegmentedControl!
     //()でAppDelegateを使えるようにしてそれから下でNSManagedObjectContextを作成する//永久的のコンテント
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    private var index = 0
+    
     var tasks = [Tasks]()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,12 +22,6 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         taskTextField.delegate = self
         createTasksDataAll()
-         
-        cellEditViewSegment.isMomentary = true
-        let index = UserDefaults.standard.integer(forKey: "index")
-        
-        cellEditViewSegment.selectedSegmentIndex = index
-        
         //tableView.reloadData()
     }
     @IBAction func taskAddBarButton(_ sender: UIBarButtonItem) {
@@ -55,15 +49,11 @@ class ViewController: UIViewController {
         
         let fetchRequest = Tasks.fetchRequest() as NSFetchRequest<Tasks>
        
-        
         switch sender.selectedSegmentIndex {
         case 0:
             tableView.isEditing = false
-       
-            index = 0
         case 1:
             tableView.isEditing = true
-            index = 1
         case 2:
             cellEditViewSegment.isMomentary = true
 
@@ -76,7 +66,6 @@ class ViewController: UIViewController {
             
                 tasks = try context.fetch(fetchRequest)
                // try context.save()
-                index = 2
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -92,7 +81,7 @@ class ViewController: UIViewController {
                 let sort1 = NSSortDescriptor(key: "date", ascending: false)
                 fetchRequest.sortDescriptors = [sort1]
                 tasks = try context.fetch(fetchRequest)
-                index = 3
+                try context.save()
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -104,8 +93,7 @@ class ViewController: UIViewController {
         default:
             print("")
         }
-        UserDefaults.standard.set(index, forKey: "index")
-
+    
     }
     
     //coreDataのCRUD等

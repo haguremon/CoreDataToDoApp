@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var cellEditViewSegment: UISegmentedControl!
     //()でAppDelegateを使えるようにしてそれから下でNSManagedObjectContextを作成する//永久的のコンテント
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
+    private var index = 0
     var tasks = [Tasks]()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +22,12 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         taskTextField.delegate = self
         createTasksDataAll()
+         
+        cellEditViewSegment.isMomentary = true
+        let index = UserDefaults.standard.integer(forKey: "index")
+        
+        cellEditViewSegment.selectedSegmentIndex = index
+        
         //tableView.reloadData()
     }
     @IBAction func taskAddBarButton(_ sender: UIBarButtonItem) {
@@ -46,38 +52,50 @@ class ViewController: UIViewController {
     }
     
     @IBAction func cellEditViewSegmentControl(_ sender: UISegmentedControl) {
+        
         let fetchRequest = Tasks.fetchRequest() as NSFetchRequest<Tasks>
-
-        switch cellEditViewSegment.selectedSegmentIndex {
+       
+        
+        switch sender.selectedSegmentIndex {
         case 0:
             tableView.isEditing = false
+       
+            index = 0
         case 1:
             tableView.isEditing = true
+            index = 1
         case 2:
-      
+            cellEditViewSegment.isMomentary = true
+
             do {
+           
+                
                 let sort1 = NSSortDescriptor(key: "date", ascending: true)
                 
                 fetchRequest.sortDescriptors = [sort1]
             
                 tasks = try context.fetch(fetchRequest)
-                try context.save()
-                createTasksDataAll()
-        
+               // try context.save()
+                index = 2
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             } catch  {
                 print(error)
             }
 
             print("")
         case 3:
+            cellEditViewSegment.isMomentary = true
             do {
-              
+                
                 let sort1 = NSSortDescriptor(key: "date", ascending: false)
                 fetchRequest.sortDescriptors = [sort1]
                 tasks = try context.fetch(fetchRequest)
-                tableView.reloadData()
-                try context.save()
-                createTasksDataAll()
+                index = 3
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             
             } catch  {
                 print(error)
@@ -86,7 +104,8 @@ class ViewController: UIViewController {
         default:
             print("")
         }
-    
+        UserDefaults.standard.set(index, forKey: "index")
+
     }
     
     //coreDataのCRUD等
@@ -149,6 +168,38 @@ class ViewController: UIViewController {
 //        upTasksMemo(task: vc2.tasks, upMemo: vc2.memoTextView.text)
 //
 //    }
+
+    @IBAction func ascendingfalseBtn(_ sender: UIButton) {
+        let fetchRequest = Tasks.fetchRequest() as NSFetchRequest<Tasks>
+        let sort1 = NSSortDescriptor(key: "date", ascending: false)
+       // let sort2 = NSSortDescriptor(key: "task", ascending: false)
+       // let sort3 = NSSortDescriptor(key: "memo", ascending: false)
+        fetchRequest.sortDescriptors = [sort1]
+
+        do {
+            let tasks = try context.fetch(fetchRequest)
+
+            tasks.forEach {
+                self.tasks.first?.date = $0.date
+                self.tasks.first?.task = $0.task
+                self.tasks.first?.memo = $0.memo
+            }
+            
+            
+            try context.save()
+            
+           
+            createTasksDataAll()
+        
+        } catch  {
+            print(error)
+        }
+    
+    
+    
+    }
+    
+
 
 }
 

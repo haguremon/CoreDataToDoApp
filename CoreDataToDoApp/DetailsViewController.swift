@@ -18,7 +18,7 @@ class DetailsViewController: UIViewController {
     var task = ""
     var tasks = Tasks()
     var memo = ""
-    func cretaedAt(create: Date) -> String{
+    func cretaedAt(create: Date) -> String {
         let f = DateFormatter()
         f.setTemplate(.full)
         return f.string(from: create) + "に作成されました"
@@ -38,10 +38,10 @@ class DetailsViewController: UIViewController {
         guard !memoTextView.text.isEmpty   else {
             return
         }
-//        let vc = self.presentingViewController as! ViewController
         let vc = storyboard?.instantiateViewController(identifier: "vc") as! ViewController
-       vc.upTasksMemo(task: tasks, upMemo: memoTextView.text)
-       present(vc, animated: true)
+        vc.upTasksMemo(task: tasks, upMemo: memoTextView.text)
+        //vc.createTasksDataAll()
+        present(vc, animated: true)
         //dismiss(animated: true)
 
     }

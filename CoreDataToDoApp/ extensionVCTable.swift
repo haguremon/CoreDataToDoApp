@@ -20,6 +20,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     //絶対関数とかでまとめることできるわ↓汚ねぇコードだわこりゃ
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
         let task = tasks[indexPath.row]
         let dalogSheet = UIAlertController(title: "taskAdd", message: "Task management", preferredStyle: .actionSheet)
         dalogSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
@@ -31,7 +32,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 let vc2 = self?.storyboard?.instantiateViewController(identifier: "vc2") as DetailsViewController?
                 vc2?.tasks = (self?.tasks[indexPath.row])!
                 vc2?.create = (self?.tasks[indexPath.row].date)!
-                vc2?.memo = (self?.tasks[indexPath.row].memo!)!
+                vc2?.memo = (self?.tasks[indexPath.row].memo)!
                 
                 self?.present(vc2!, animated: true)
                 
@@ -60,10 +61,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 //クロージャ内でselfに参照するのでweakをつけて弱参照にしてる
                 self?.upDateTasksData(task: task, newTask: editText)
+                print("tet1")
             }
             dalog.addAction(EditTask)
-            self?.present(dalog, animated: true)
-            
+            self?.present(dalog, animated: true, completion: {
+                print("tet2")
+            })
+
         }))
         
         dalogSheet.addAction(UIAlertAction(title: "delete", style: .destructive, handler: {[weak self] _ in
@@ -104,9 +108,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         let vc2 = storyboard?.instantiateViewController(identifier: "vc2") as! DetailsViewController
         vc2.tasks = tasks[indexPath.row]
-        vc2.task = tasks[indexPath.row].task!
-        vc2.create = tasks[indexPath.row].date!
-        vc2.memo = tasks[indexPath.row].memo ?? "特になし"
+        vc2.task = tasks[indexPath.row].task
+        vc2.create = tasks[indexPath.row].date
+        vc2.memo = tasks[indexPath.row].memo 
         present(vc2, animated: true)
     }
     
@@ -118,13 +122,18 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     //moveRowAtで並び替え
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        context.delete(tasks[sourceIndexPath.row])
-        context.insert(tasks[destinationIndexPath.row])
+        context.delete(tasks[sourceIndexPath.row])//一度消して
+        context.insert(tasks[destinationIndexPath.row])//またそれを入れる
+        
         do {
+           
             try context.save()
             createTasksDataAll()
+        
         } catch {
+            
             print(error)
+        
         }
         
     }

@@ -16,9 +16,9 @@ extension Tasks {
         return NSFetchRequest<Tasks>(entityName: "Tasks")
     }
 
-    @NSManaged public var task: String?
-    @NSManaged public var date: Date?
-    @NSManaged public var memo: String?
+    @NSManaged public var task: String
+    @NSManaged public var date: Date
+    @NSManaged public var memo: String
 
 }
 

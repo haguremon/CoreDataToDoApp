@@ -186,9 +186,65 @@ class ViewController: UIViewController {
     
     
     }
+    func searchingData(task: String) {
+        
+        let fetchRequest = Tasks.fetchRequest() as NSFetchRequest<Tasks>
+        let predicate = NSPredicate(format: "task == %@",task)//task一致したやつを指定
+        
+        fetchRequest.predicate = predicate
+        do {
+           tasks = try context.fetch(fetchRequest)
+       
+        } catch  {
+           
+            print(error)
+        }
+        
+       
+        DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        
+    }
+    func searchResultdalog(message: String){
+        let dalog = UIAlertController(title: "検索結果", message: message, preferredStyle: .alert)
+        dalog.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+       present(dalog, animated: true, completion: nil)
+    }
     
-
-
+    
+    @IBAction func searchingButton(_ sender: UIButton) {
+        guard let task = taskTextField.text, !task.isEmpty  else {
+            searchResultdalog(message: "値を入れてください")
+            return
+            
+        }
+        searchingData(task: task)
+        
+        guard !tasks.isEmpty else {
+            searchResultdalog(message: "値がヒットしませんでした")
+            
+            createTasksDataAll()
+            
+            return
+        }
+        searchResultdalog(message: "\(tasks.count)件ヒットしました")
+            
+         
+ 
+        
+       
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            
+            self.createTasksDataAll()
+       
+        }
+        
+   
+    
+    }
+    
 }
 
 
